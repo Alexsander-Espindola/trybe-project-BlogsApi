@@ -12,10 +12,10 @@
     "shelljs": "^0.8.5"
   },
   "scripts": {
-    "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $",
+    "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "node index.js",
-    "drop": "npx sequelize-cli db:drop $",
-    "seed": "npx sequelize-cli db:seed:all $",
+    "drop": "npx sequelize-cli db:drop",
+    "seed": "npx sequelize-cli db:seed:all",
     "test": "jest --runInBand",
     "test-coverage": "jest --runInBand --coverage",
     "debug": "nodemon index.js",
