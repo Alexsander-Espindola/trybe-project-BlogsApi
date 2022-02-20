@@ -10,6 +10,7 @@ const {
   invalidDisplayName,
   tokenNotFound,
   tokenInvalid,
+  userNotFound,
 } = require('./statusCode');
 
 const validateEmail = async (email) => {
@@ -41,7 +42,20 @@ const verifyToken = (authorization) => {
   if (!ifTokenValid) throw tokenInvalid;
 };
 
+const findById = async (id) => {
+  const getUserById = await Users.findOne({
+    attributes: { exclude: ['updatedAt', 'createdAt'] },
+    where: {
+      id,
+    },
+  });
+
+  if (!getUserById) throw userNotFound;
+  return getUserById;
+};
+
 module.exports = {
   verifyUser,
   verifyToken,
+  findById,
 };

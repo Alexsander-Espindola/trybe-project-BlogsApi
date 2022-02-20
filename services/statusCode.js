@@ -27,6 +27,8 @@ const tokenInvalid = { status: 401, message: 'Expired or invalid token' };
 
 const invalidEntries = { status: 400, message: 'Invalid fields' };
 
+const userNotFound = { status: 404, message: 'User does not exist' };
+
 const invalidDisplayName = {
   status: 400,
   message: '"displayName" length must be at least 8 characters long',
@@ -42,6 +44,7 @@ module.exports = {
   invalidPassword,
   tokenNotFound,
   tokenInvalid,
+  userNotFound,
   invalidEntries,
   invalidDisplayName,
 };
