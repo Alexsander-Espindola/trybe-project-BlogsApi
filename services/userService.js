@@ -1,6 +1,6 @@
 const { Users } = require('../models');
 
-const emailExists = { status: 409, message: 'Email already registered' };
+const emailExists = { status: 409, message: 'User already registered' };
 // const invalidEntries = { status: 400, message: 'Invalid entries. Try again.' };
 const invalidEmail = { status: 400, message: '"email" must be a valid email' };
 const requiredEmail = { status: 400, message: '"email" is required' };
