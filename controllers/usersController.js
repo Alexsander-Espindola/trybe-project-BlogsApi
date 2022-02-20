@@ -13,7 +13,6 @@ router.post('/', async (req, res, next) => {
     const { dataValues } = await Users.create({ displayName, email, password, image });
     const { password: _password, ...userWithoutPassword } = dataValues;
     const token = authService.genToken(userWithoutPassword);
-    console.log(token);
 
     return res.status(201).json({ token });
   } catch (error) {
