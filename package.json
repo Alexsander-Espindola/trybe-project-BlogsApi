@@ -8,12 +8,14 @@
     "express": "4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "2.1.0",
+    "nodemon": "^2.0.15",
     "sequelize": "^6.15.0",
     "shelljs": "^0.8.5"
   },
   "scripts": {
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "node index.js",
+    "dev": "nodemon .",
     "drop": "npx sequelize-cli db:drop",
     "seed": "npx sequelize-cli db:seed:all",
     "test": "jest --runInBand",
