@@ -1,12 +1,15 @@
 const { Users } = require('../models');
+const authService = require('./authService');
 
 const {
   emailExists,
   invalidEmail,
   requiredEmail,
   requiredPassword,
-  invalidDisplayName,
   invalidPassword,
+  invalidDisplayName,
+  tokenNotFound,
+  tokenInvalid,
 } = require('./statusCode');
 
 const validateEmail = async (email) => {
@@ -32,6 +35,13 @@ const verifyUser = async (displayName, email, password) => {
   await validateEmail(email);
 };
 
+const verifyToken = (authorization) => {
+  if (!authorization) throw tokenNotFound;
+  const ifTokenValid = authService.verifyToken(authorization);
+  if (!ifTokenValid) throw tokenInvalid;
+};
+
 module.exports = {
   verifyUser,
+  verifyToken,
 };
