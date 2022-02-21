@@ -3,7 +3,7 @@ const authService = require('../services/authService');
 
 const router = express.Router();
 const { Users } = require('../models');
-const { verifyUser, findById } = require('../services/userService');
+const { verifyUser, findById, deleteUser } = require('../services/userService');
 
 router.post('/', async (req, res, next) => {
   try {
@@ -48,6 +48,19 @@ router.get('/:id', async (req, res, next) => {
   } catch (error) {
     console.error(error);
     return next(error);
+  }
+});
+
+router.delete('/me', async (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+    const email = await authService.verifyToken(authorization);
+    await deleteUser(email);
+
+    return res.status(204).json();
+  } catch (error) {
+    console.error(error.message);
+    next(error);
   }
 });
 
