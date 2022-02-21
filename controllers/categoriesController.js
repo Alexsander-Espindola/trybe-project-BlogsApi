@@ -21,4 +21,20 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.get('/', async (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+    await authService.verifyToken(authorization);
+
+    const categories = await Categories.findAll({
+      attributes: { exclude: ['updatedAt', 'createdAt'] },
+    });
+
+    return res.status(200).json(categories);
+  } catch (error) {
+    console.error(error.message);
+    return next(error);
+  }
+});
+
 module.exports = router;

@@ -21,6 +21,7 @@ const verifyToken = (token) => {
 
     return data;
   } catch (error) {
+    console.error(error.message);
     throw tokenInvalid;
   }
 };

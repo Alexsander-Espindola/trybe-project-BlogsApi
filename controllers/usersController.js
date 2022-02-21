@@ -3,7 +3,7 @@ const authService = require('../services/authService');
 
 const router = express.Router();
 const { Users } = require('../models');
-const { verifyUser, verifyToken, findById } = require('../services/userService');
+const { verifyUser, findById } = require('../services/userService');
 
 router.post('/', async (req, res, next) => {
   try {
@@ -23,7 +23,7 @@ router.post('/', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    await verifyToken(authorization);
+    await authService.verifyToken(authorization);
 
     const users = await Users.findAll({
       attributes: { exclude: ['updatedAt', 'createdAt'] },
@@ -39,7 +39,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    await verifyToken(authorization);
+    await authService.verifyToken(authorization);
 
     const { id } = req.params;
     const getUserByid = await findById(id);
