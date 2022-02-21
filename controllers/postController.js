@@ -3,7 +3,7 @@ const express = require('express');
 const router = express();
 const authService = require('../services/authService');
 const { BlogPosts, Users, Categories } = require('../models');
-const { verifyPost, findById, updatePost } = require('../services/postService');
+const { verifyPost, findById, updatePost, deletePost } = require('../services/postService');
 
 router.post('/', async (req, res, next) => {
   try {
@@ -77,6 +77,20 @@ router.put('/:id', async (req, res, next) => {
     return res.status(200).json(updatedPost);
   } catch (error) {
     console.error(error.message);
+    return next(error);
+  }
+});
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+    const email = await authService.verifyToken(authorization);
+    const { id } = req.params;
+    await deletePost(id, email);
+
+    return res.status(204).json();
+  } catch (error) {
+    console.error(error);
     return next(error);
   }
 });

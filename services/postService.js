@@ -76,8 +76,19 @@ const updatePost = async (id, email, post, categoryIds) => {
   return updatedPost;
 };
 
+const deletePost = async (id, email) => {
+  const post = await Users.findOne({ where: { id } });
+
+  if (!post) throw postNotFound;
+
+  await verifyUser(id, email);
+
+  await BlogPosts.destroy({ where: { id } });
+};
+
 module.exports = {
   verifyPost,
   findById,
   updatePost,
+  deletePost,
 };
