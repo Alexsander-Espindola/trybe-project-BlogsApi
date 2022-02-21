@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-// const API_SECRET = 'ABC123456';
+const {
+  tokenNotFound,
+  tokenInvalid,
+} = require('./statusCode');
 
 const JWT_CONFIG = {
   expiresIn: 360000,
@@ -10,14 +13,15 @@ const JWT_CONFIG = {
 const genToken = (data) => jwt.sign({ data }, process.env.JWT_SECRET, JWT_CONFIG);
 
 const verifyToken = (token) => {
+  if (!token) throw tokenNotFound;
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const { data } = decoded;
+    if (!data) throw tokenInvalid;
 
     return data;
   } catch (error) {
-    console.log('FALHA NA VERIFICAÇÃO');
-    return null;
+    throw tokenInvalid;
   }
 };
 

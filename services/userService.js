@@ -1,5 +1,4 @@
 const { Users } = require('../models');
-const authService = require('./authService');
 
 const {
   emailExists,
@@ -8,8 +7,6 @@ const {
   requiredPassword,
   invalidPassword,
   invalidDisplayName,
-  tokenNotFound,
-  tokenInvalid,
   userNotFound,
 } = require('./statusCode');
 
@@ -36,12 +33,6 @@ const verifyUser = async (displayName, email, password) => {
   await validateEmail(email);
 };
 
-const verifyToken = (authorization) => {
-  if (!authorization) throw tokenNotFound;
-  const ifTokenValid = authService.verifyToken(authorization);
-  if (!ifTokenValid) throw tokenInvalid;
-};
-
 const findById = async (id) => {
   const getUserById = await Users.findOne({
     attributes: { exclude: ['updatedAt', 'createdAt'] },
@@ -56,6 +47,5 @@ const findById = async (id) => {
 
 module.exports = {
   verifyUser,
-  verifyToken,
   findById,
 };
