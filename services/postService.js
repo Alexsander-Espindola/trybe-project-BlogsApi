@@ -6,6 +6,7 @@ const {
   categoryIdsRequired,
   categoryIdNotFound,
   postNotFound,
+  invalidUser,
   categoryIdCannotEdited,
 } = require('./statusCode');
 
@@ -53,12 +54,19 @@ const findById = async (id) => {
   return getPostById[0];
 };
 
+const verifyUser = async (id, email) => {
+  const findPost = await BlogPosts.findOne({ where: { id } });
+  const findUser = await Users.findOne({ where: { email } });
+  if (findPost.userId !== findUser.id) throw invalidUser;
+};
+
 const updatePost = async (id, email, post, categoryIds) => {
   const { title, content } = post;
   if (categoryIds) throw categoryIdCannotEdited;
   if (!title) throw titleRequired;
   if (!content) throw contentRequired;
   const updated = Date.now();
+  await verifyUser(id, email);
   await BlogPosts.update(
     { ...post, updated },
     { where: { id } },

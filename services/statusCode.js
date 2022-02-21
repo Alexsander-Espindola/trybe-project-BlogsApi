@@ -36,6 +36,7 @@ const invalidEntries = { status: 400, message: 'Invalid fields' };
 
 const userNotFound = { status: 404, message: 'User does not exist' };
 const postNotFound = { status: 404, message: 'Post does not exist' };
+const invalidUser = { status: 401, message: 'Unauthorized user' };
 const categoryIdCannotEdited = { status: 400, message: 'Categories cannot be edited' };
 
 const invalidDisplayName = {
@@ -61,5 +62,6 @@ module.exports = {
   invalidEntries,
   categoryIdCannotEdited,
   postNotFound,
+  invalidUser,
   invalidDisplayName,
 };
