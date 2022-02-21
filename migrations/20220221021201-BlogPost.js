@@ -21,18 +21,18 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      createdAt: {
-        type: Sequelize.DATE
+      user: {
+        type: Sequelize.JSON
       },
-      updatedAt: {
-        type: Sequelize.DATE
+      categories: {
+        type: Sequelize.JSON
       },
       published: {
         type: Sequelize.DATE
       },
       updated: {
         type: Sequelize.DATE
-      }
+      },
     });
   },
 

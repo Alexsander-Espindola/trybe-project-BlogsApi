@@ -7,18 +7,32 @@ const {
   categoryIdNotFound,
 } = require('./statusCode');
 
-const verifyCategories = async (categoryIds) => {
-  const findAll = await Categories.findAll({
-    attributes: ['id'],
+const findAll = async () => {
+  const allCategories = await Categories.findAll({
+    attributes: ['id', 'name'],
   });
+  return allCategories;
+};
+
+const verifyCategories = async (categoryIds) => {
+  const allCategories = await findAll();
+  const returnCategories = [];
   const allCategoriesId = [];
-  findAll.forEach(({ dataValues: { id } }) => {
+  const allCategoriesName = [];
+  allCategories.forEach(({ dataValues }) => {
+    const { id, name } = dataValues;
     allCategoriesId.push(id);
+    allCategoriesName.push(name);
   });
   categoryIds.forEach((id) => {
-    const test = allCategoriesId.indexOf(id);
-    if (test === -1) throw categoryIdNotFound;
+    const arrayPosition = allCategoriesId.indexOf(id);
+    if (arrayPosition === -1) throw categoryIdNotFound;
+    returnCategories.push({
+      id: allCategoriesId[arrayPosition],
+      name: allCategoriesName[arrayPosition],
+    });
   });
+  return returnCategories;
 };
 
 const verifyPost = async (title, content, categoryIds, findUser) => {
@@ -27,7 +41,8 @@ const verifyPost = async (title, content, categoryIds, findUser) => {
   if (!content) throw contentRequired;
   if (!categoryIds) throw categoryIdsRequired;
 
-  await verifyCategories(categoryIds);
+  const allCategories = await verifyCategories(categoryIds);
+  return allCategories;
 };
 
 module.exports = {
