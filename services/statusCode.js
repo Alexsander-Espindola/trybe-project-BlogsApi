@@ -35,6 +35,8 @@ const categoryIdNotFound = { status: 400, message: '"categoryIds" not found' };
 const invalidEntries = { status: 400, message: 'Invalid fields' };
 
 const userNotFound = { status: 404, message: 'User does not exist' };
+const postNotFound = { status: 404, message: 'Post does not exist' };
+const categoryIdCannotEdited = { status: 400, message: 'Categories cannot be edited' };
 
 const invalidDisplayName = {
   status: 400,
@@ -57,5 +59,7 @@ module.exports = {
   categoryIdNotFound,
   userNotFound,
   invalidEntries,
+  categoryIdCannotEdited,
+  postNotFound,
   invalidDisplayName,
 };

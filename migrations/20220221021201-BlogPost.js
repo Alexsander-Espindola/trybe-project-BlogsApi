@@ -13,19 +13,22 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      UsersId: {
+        defaultValue: 0,
+        type: Sequelize.INTEGER
+      },
       content: {
         allowNull: false,
         type: Sequelize.STRING
       },
       userId: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      user: {
-        type: Sequelize.JSON
-      },
-      categories: {
-        type: Sequelize.JSON
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       published: {
         type: Sequelize.DATE
