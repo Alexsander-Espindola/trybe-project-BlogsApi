@@ -23,6 +23,13 @@ const invalidPassword = {
 const tokenNotFound = { status: 401, message: 'Token not found' };
 const tokenInvalid = { status: 401, message: 'Expired or invalid token' };
 
+// Status code for post
+
+const titleRequired = { status: 400, message: '"title" is required' };
+const contentRequired = { status: 400, message: '"content" is required' };
+const categoryIdsRequired = { status: 400, message: '"categoryIds" is required' };
+const categoryIdNotFound = { status: 400, message: '"categoryIds" not found' };
+
 // Outhers Status code
 
 const invalidEntries = { status: 400, message: 'Invalid fields' };
@@ -44,6 +51,10 @@ module.exports = {
   invalidPassword,
   tokenNotFound,
   tokenInvalid,
+  titleRequired,
+  contentRequired,
+  categoryIdsRequired,
+  categoryIdNotFound,
   userNotFound,
   invalidEntries,
   invalidDisplayName,

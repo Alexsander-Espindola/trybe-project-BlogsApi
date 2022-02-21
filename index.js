@@ -5,6 +5,7 @@ const app = express();
 const usersController = require('./controllers/usersController');
 const loginController = require('./controllers/loginController');
 const categoriesController = require('./controllers/categoriesController');
+const postController = require('./controllers/postController');
 const error = require('./middlewares/errorMiddleware');
 
 app.use(express.json());
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/user', usersController);
 app.use('/login', loginController);
 app.use('/categories', categoriesController);
+app.use('/post', postController);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (request, response) => {

@@ -10,9 +10,7 @@ const {
 const getEmail = async (email) => {
   const findEmail = await Users.findAll({
     attributes: ['email', 'password'],
-    where: {
-      email: `${email}`,
-    },
+    where: { email },
   });
 
   return findEmail[0];

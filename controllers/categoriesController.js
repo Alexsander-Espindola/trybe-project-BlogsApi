@@ -3,7 +3,6 @@ const express = require('express');
 const router = express();
 const { Categories } = require('../models');
 const authService = require('../services/authService');
-// const {} = require('../services/categoriesService');
 
 router.post('/', async (req, res, next) => {
   try {
